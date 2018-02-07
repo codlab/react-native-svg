@@ -288,11 +288,15 @@ class PropHelper {
         public Path getPath() {
             mPath = new Path();
             mBezierCurves = Arguments.createArray();
-            mMatcher = PATH_REG_EXP.matcher(DECIMAL_REG_EXP.matcher(mString).replaceAll("$1,"));
+            
+            if(null != mString) {
+                mMatcher = PATH_REG_EXP.matcher(DECIMAL_REG_EXP.matcher(mString).replaceAll("$1,"));
 
-            while (mMatcher.find() && mValid) {
-                executeCommand(mMatcher.group());
+                while (mMatcher.find() && mValid) {
+                    executeCommand(mMatcher.group());
+                }
             }
+            
             return mPath;
         }
 
